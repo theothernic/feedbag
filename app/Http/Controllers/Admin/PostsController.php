@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class PostsController extends Controller
 {
@@ -50,7 +52,7 @@ class PostsController extends Controller
 
         if (!$record = Post::create($data))
         {
-            throw new \Exception('Could not create post.');
+            throw new Exception('Could not create post.');
         }
 
         return redirect()->route('admin.posts.index');
@@ -73,7 +75,7 @@ class PostsController extends Controller
 
         if (!Post::findOrFail($id)->update($data))
         {
-            throw new \Exception('Could not complete the editing action for this post.');
+            throw new Exception('Could not complete the editing action for this post.');
         }
 
 
