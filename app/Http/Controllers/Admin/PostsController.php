@@ -45,6 +45,8 @@ class PostsController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = Auth::user()->id;
+        if (!isset($data['posted_at']))
+            $data['posted_at'] = Carbon::now()->format('Y-m-d H:i:s')
 
         if (!$record = Post::create($data))
         {
